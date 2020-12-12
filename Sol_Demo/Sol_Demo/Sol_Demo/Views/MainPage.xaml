@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Sol_Demo.ViewModels"
+             xmlns:con="clr-namespace:Sol_Demo.Converters"
+             x:Class="Sol_Demo.Views.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:CustomerViewModel></vm:CustomerViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <con:FullNameConverter x:Key="fullNameConverter"></con:FullNameConverter>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Entry x:Name="txtFirstName" Text="{Binding Customer.FirstName, Mode=TwoWay}"></Entry>
+        <Entry x:Name="txtLastName" Text="{Binding Customer.LastName, Mode=TwoWay}"></Entry>
+        <Label>
+            <Label.Text>
+                <MultiBinding Converter="{x:StaticResource fullNameConverter}">
+                    <Binding Path="Customer.FirstName"></Binding>
+                    <Binding Path="Customer.LastName"></Binding>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+    </StackLayout>
+</ContentPage>
